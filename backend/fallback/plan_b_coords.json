@@ -1,0 +1,45 @@
+{
+  "plan_id": "plan_b",
+  "description": "Plan B — 4 Bedrooms, 3 Bathrooms, Kitchen, Laundry, Foyer, Living Room (complex T-junctions)",
+  "scale_factor": 40.0,
+  "image_dimensions": [1000, 800],
+  "walls": [
+    {"id": "w1",  "start": [50, 50],   "end": [950, 50],   "length_px": 900, "length_m": 22.5, "orientation": "horizontal"},
+    {"id": "w2",  "start": [950, 50],  "end": [950, 750],  "length_px": 700, "length_m": 17.5, "orientation": "vertical"},
+    {"id": "w3",  "start": [950, 750], "end": [50, 750],   "length_px": 900, "length_m": 22.5, "orientation": "horizontal"},
+    {"id": "w4",  "start": [50, 750],  "end": [50, 50],    "length_px": 700, "length_m": 17.5, "orientation": "vertical"},
+    {"id": "w5",  "start": [500, 50],  "end": [500, 750],  "length_px": 700, "length_m": 17.5, "orientation": "vertical"},
+    {"id": "w6",  "start": [50, 400],  "end": [500, 400],  "length_px": 450, "length_m": 11.25, "orientation": "horizontal"},
+    {"id": "w7",  "start": [500, 300], "end": [950, 300],  "length_px": 450, "length_m": 11.25, "orientation": "horizontal"},
+    {"id": "w8",  "start": [500, 530], "end": [950, 530],  "length_px": 450, "length_m": 11.25, "orientation": "horizontal"},
+    {"id": "w9",  "start": [725, 300], "end": [725, 530],  "length_px": 230, "length_m": 5.75,  "orientation": "vertical"},
+    {"id": "w10", "start": [275, 400], "end": [275, 750],  "length_px": 350, "length_m": 8.75,  "orientation": "vertical"},
+    {"id": "w11", "start": [50, 200],  "end": [500, 200],  "length_px": 450, "length_m": 11.25, "orientation": "horizontal"},
+    {"id": "w12", "start": [725, 530], "end": [725, 750],  "length_px": 220, "length_m": 5.5,   "orientation": "vertical"},
+    {"id": "w13", "start": [275, 50],  "end": [275, 200],  "length_px": 150, "length_m": 3.75,  "orientation": "vertical"}
+  ],
+  "rooms": [
+    {"id": "r1",  "label": "FOYER",      "polygon": [[50,50],[275,50],[275,200],[50,200]],       "area_m2": 16.4, "centroid": [162, 125]},
+    {"id": "r2",  "label": "LIVING ROOM", "polygon": [[275,50],[500,50],[500,200],[275,200]],     "area_m2": 16.4, "centroid": [387, 125]},
+    {"id": "r3",  "label": "KITCHEN",     "polygon": [[50,200],[500,200],[500,400],[50,400]],     "area_m2": 56.25, "centroid": [275, 300]},
+    {"id": "r4",  "label": "LAUNDRY",     "polygon": [[50,400],[275,400],[275,750],[50,750]],     "area_m2": 24.1, "centroid": [162, 575]},
+    {"id": "r5",  "label": "BATHROOM 1",  "polygon": [[275,400],[500,400],[500,750],[275,750]],   "area_m2": 24.1, "centroid": [387, 575]},
+    {"id": "r6",  "label": "BEDROOM 1",   "polygon": [[500,50],[950,50],[950,300],[500,300]],     "area_m2": 70.3, "centroid": [725, 175]},
+    {"id": "r7",  "label": "BEDROOM 2",   "polygon": [[500,300],[725,300],[725,530],[500,530]],   "area_m2": 32.9, "centroid": [612, 415]},
+    {"id": "r8",  "label": "BATHROOM 2",  "polygon": [[725,300],[950,300],[950,530],[725,530]],   "area_m2": 32.9, "centroid": [837, 415]},
+    {"id": "r9",  "label": "BEDROOM 3",   "polygon": [[500,530],[725,530],[725,750],[500,750]],   "area_m2": 30.9, "centroid": [612, 640]},
+    {"id": "r10", "label": "BEDROOM 4",   "polygon": [[725,530],[950,530],[950,750],[725,750]],   "area_m2": 30.9, "centroid": [837, 640]}
+  ],
+  "openings": [
+    {"id": "o1",  "wall_id": "w5",  "position": [500, 125], "width_m": 0.9, "width_px": 36, "type": "door", "height_m": 2.1},
+    {"id": "o2",  "wall_id": "w6",  "position": [275, 400], "width_m": 0.9, "width_px": 36, "type": "door", "height_m": 2.1},
+    {"id": "o3",  "wall_id": "w7",  "position": [612, 300], "width_m": 0.9, "width_px": 36, "type": "door", "height_m": 2.1},
+    {"id": "o4",  "wall_id": "w9",  "position": [725, 415], "width_m": 0.9, "width_px": 36, "type": "door", "height_m": 2.1},
+    {"id": "o5",  "wall_id": "w8",  "position": [612, 530], "width_m": 0.9, "width_px": 36, "type": "door", "height_m": 2.1},
+    {"id": "o6",  "wall_id": "w12", "position": [725, 640], "width_m": 0.9, "width_px": 36, "type": "door", "height_m": 2.1},
+    {"id": "o7",  "wall_id": "w11", "position": [275, 200], "width_m": 0.9, "width_px": 36, "type": "door", "height_m": 2.1},
+    {"id": "o8",  "wall_id": "w1",  "position": [162, 50],  "width_m": 1.0, "width_px": 40, "type": "door", "height_m": 2.1},
+    {"id": "o9",  "wall_id": "w1",  "position": [725, 50],  "width_m": 1.5, "width_px": 60, "type": "window", "height_m": 1.2, "sill_m": 0.9},
+    {"id": "o10", "wall_id": "w2",  "position": [950, 175], "width_m": 1.2, "width_px": 48, "type": "window", "height_m": 1.2, "sill_m": 0.9}
+  ]
+}

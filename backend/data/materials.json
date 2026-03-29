@@ -1,0 +1,88 @@
+{
+  "materials": [
+    {
+      "id": "aac_block",
+      "name": "AAC Blocks",
+      "cost_level": 1,
+      "cost_per_m3_inr": 4500,
+      "compressive_strength_mpa": 4,
+      "durability_score": 8,
+      "thermal_rating": 9,
+      "best_use": ["partition_wall", "non_structural"],
+      "weight_kg_m3": 650,
+      "notes": "Lightweight, excellent thermal insulation, poor load-bearing"
+    },
+    {
+      "id": "red_brick",
+      "name": "Red Brick",
+      "cost_level": 2,
+      "cost_per_m3_inr": 7000,
+      "compressive_strength_mpa": 10,
+      "durability_score": 6,
+      "thermal_rating": 5,
+      "best_use": ["load_bearing_wall", "general_walling"],
+      "weight_kg_m3": 1900,
+      "notes": "Traditional, good compression, poor tensile, moderate durability"
+    },
+    {
+      "id": "rcc",
+      "name": "RCC (Reinforced Concrete)",
+      "cost_level": 4,
+      "cost_per_m3_inr": 12000,
+      "compressive_strength_mpa": 30,
+      "durability_score": 10,
+      "thermal_rating": 3,
+      "best_use": ["column", "slab", "long_span_beam"],
+      "weight_kg_m3": 2400,
+      "notes": "Mandatory for spans >4m, columns, and slabs"
+    },
+    {
+      "id": "steel_frame",
+      "name": "Steel Frame",
+      "cost_level": 4,
+      "cost_per_m3_inr": 18000,
+      "compressive_strength_mpa": 250,
+      "durability_score": 9,
+      "thermal_rating": 2,
+      "best_use": ["long_span", "column"],
+      "weight_kg_m3": 7850,
+      "notes": "Required for spans >5m. High cost but exceptional strength."
+    },
+    {
+      "id": "hollow_concrete_block",
+      "name": "Hollow Concrete Block",
+      "cost_level": 1,
+      "cost_per_m3_inr": 3800,
+      "compressive_strength_mpa": 6,
+      "durability_score": 7,
+      "thermal_rating": 6,
+      "best_use": ["non_structural_wall", "partition_wall"],
+      "weight_kg_m3": 1000,
+      "notes": "Economical for non-structural dividers"
+    },
+    {
+      "id": "fly_ash_brick",
+      "name": "Fly Ash Brick",
+      "cost_level": 1,
+      "cost_per_m3_inr": 4000,
+      "compressive_strength_mpa": 10,
+      "durability_score": 8,
+      "thermal_rating": 6,
+      "best_use": ["general_walling", "load_bearing_wall"],
+      "weight_kg_m3": 1400,
+      "notes": "Eco-friendly, dimensionally accurate, good for general walling"
+    },
+    {
+      "id": "precast_panel",
+      "name": "Precast Concrete Panel",
+      "cost_level": 3,
+      "cost_per_m3_inr": 9500,
+      "compressive_strength_mpa": 40,
+      "durability_score": 10,
+      "thermal_rating": 4,
+      "best_use": ["structural_wall", "slab"],
+      "weight_kg_m3": 2300,
+      "notes": "Fast construction, high quality control, suits structural walls and slabs"
+    }
+  ]
+}

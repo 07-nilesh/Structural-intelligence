@@ -1,0 +1,37 @@
+{
+  "plan_id": "plan_c",
+  "description": "Plan C — 3 Bedrooms, 2 Bathrooms, L-shaped footprint",
+  "scale_factor": 45.0,
+  "image_dimensions": [900, 750],
+  "walls": [
+    {"id": "w1",  "start": [50, 50],   "end": [600, 50],   "length_px": 550, "length_m": 12.2, "orientation": "horizontal"},
+    {"id": "w2",  "start": [600, 50],  "end": [600, 350],  "length_px": 300, "length_m": 6.67, "orientation": "vertical"},
+    {"id": "w3",  "start": [600, 350], "end": [850, 350],  "length_px": 250, "length_m": 5.56, "orientation": "horizontal"},
+    {"id": "w4",  "start": [850, 350], "end": [850, 700],  "length_px": 350, "length_m": 7.78, "orientation": "vertical"},
+    {"id": "w5",  "start": [850, 700], "end": [50, 700],   "length_px": 800, "length_m": 17.78, "orientation": "horizontal"},
+    {"id": "w6",  "start": [50, 700],  "end": [50, 50],    "length_px": 650, "length_m": 14.44, "orientation": "vertical"},
+    {"id": "w7",  "start": [325, 50],  "end": [325, 700],  "length_px": 650, "length_m": 14.44, "orientation": "vertical"},
+    {"id": "w8",  "start": [50, 375],  "end": [325, 375],  "length_px": 275, "length_m": 6.11,  "orientation": "horizontal"},
+    {"id": "w9",  "start": [325, 350], "end": [600, 350],  "length_px": 275, "length_m": 6.11,  "orientation": "horizontal"},
+    {"id": "w10", "start": [325, 525], "end": [850, 525],  "length_px": 525, "length_m": 11.67, "orientation": "horizontal"},
+    {"id": "w11", "start": [587, 350], "end": [587, 525],  "length_px": 175, "length_m": 3.89,  "orientation": "vertical"}
+  ],
+  "rooms": [
+    {"id": "r1", "label": "BEDROOM 1",  "polygon": [[50,50],[325,50],[325,375],[50,375]],       "area_m2": 39.4, "centroid": [187, 212]},
+    {"id": "r2", "label": "BEDROOM 2",  "polygon": [[325,50],[600,50],[600,350],[325,350]],      "area_m2": 36.6, "centroid": [462, 200]},
+    {"id": "r3", "label": "LIVING ROOM","polygon": [[50,375],[325,375],[325,700],[50,700]],      "area_m2": 46.7, "centroid": [187, 537]},
+    {"id": "r4", "label": "BATHROOM 1", "polygon": [[325,350],[587,350],[587,525],[325,525]],    "area_m2": 20.1, "centroid": [456, 437]},
+    {"id": "r5", "label": "BATHROOM 2", "polygon": [[587,350],[850,350],[850,525],[587,525]],    "area_m2": 20.1, "centroid": [718, 437]},
+    {"id": "r6", "label": "BEDROOM 3",  "polygon": [[325,525],[850,525],[850,700],[325,700]],    "area_m2": 50.7, "centroid": [587, 612]}
+  ],
+  "openings": [
+    {"id": "o1", "wall_id": "w7",  "position": [325, 212], "width_m": 0.9, "width_px": 40, "type": "door", "height_m": 2.1},
+    {"id": "o2", "wall_id": "w8",  "position": [187, 375], "width_m": 0.9, "width_px": 40, "type": "door", "height_m": 2.1},
+    {"id": "o3", "wall_id": "w9",  "position": [462, 350], "width_m": 0.9, "width_px": 40, "type": "door", "height_m": 2.1},
+    {"id": "o4", "wall_id": "w10", "position": [456, 525], "width_m": 0.9, "width_px": 40, "type": "door", "height_m": 2.1},
+    {"id": "o5", "wall_id": "w10", "position": [718, 525], "width_m": 0.9, "width_px": 40, "type": "door", "height_m": 2.1},
+    {"id": "o6", "wall_id": "w1",  "position": [187, 50],  "width_m": 1.5, "width_px": 67, "type": "window", "height_m": 1.2, "sill_m": 0.9},
+    {"id": "o7", "wall_id": "w5",  "position": [587, 700], "width_m": 1.5, "width_px": 67, "type": "window", "height_m": 1.2, "sill_m": 0.9},
+    {"id": "o8", "wall_id": "w6",  "position": [50, 537],  "width_m": 1.0, "width_px": 45, "type": "door", "height_m": 2.1}
+  ]
+}
