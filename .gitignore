@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+venv/
+.venv/
+
+# Environment
+.env
+
+# Node
+node_modules/
+frontend/dist/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Debug / test artifacts
+debug_*.png
+*_output.txt
+*_results*.txt
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Backend uploads (generated at runtime)
+backend/uploads/
+
+# Cache
+backend/cache.json

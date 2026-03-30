@@ -1,0 +1,620 @@
+{
+  "plan1_a.png": {
+    "raw_source": "plan_a.png",
+    "wall_count": 105,
+    "openings": [
+      {
+        "id": 0,
+        "type": "window",
+        "center_px": [
+          43.0,
+          374.5
+        ],
+        "size_px": [
+          8,
+          125
+        ],
+        "wall_id": 55
+      },
+      {
+        "id": 1,
+        "type": "window",
+        "center_px": [
+          689.5,
+          362.0
+        ],
+        "size_px": [
+          7,
+          108
+        ],
+        "wall_id": 66
+      },
+      {
+        "id": 2,
+        "type": "window",
+        "center_px": [
+          44.0,
+          174.5
+        ],
+        "size_px": [
+          8,
+          91
+        ],
+        "wall_id": 19
+      },
+      {
+        "id": 3,
+        "type": "window",
+        "center_px": [
+          686.5,
+          158.5
+        ],
+        "size_px": [
+          9,
+          105
+        ],
+        "wall_id": 14
+      },
+      {
+        "id": 4,
+        "type": "window",
+        "center_px": [
+          144.0,
+          76.0
+        ],
+        "size_px": [
+          114,
+          8
+        ],
+        "wall_id": 16
+      },
+      {
+        "id": 5,
+        "type": "window",
+        "center_px": [
+          495.0,
+          75.5
+        ],
+        "size_px": [
+          114,
+          9
+        ],
+        "wall_id": 16
+      },
+      {
+        "id": 6,
+        "type": "door_panel",
+        "center_px": [
+          381.5,
+          561.0
+        ],
+        "size_px": [
+          135,
+          8
+        ],
+        "wall_id": 38
+      },
+      {
+        "id": 7,
+        "type": "door_swing",
+        "center_px": [
+          398.5,
+          534.5
+        ],
+        "metadata": {
+          "radius": 25.93270492553711,
+          "start_angle": 1.7357045889283889,
+          "end_angle": 356.98721249581666,
+          "span": 199.02560603756868,
+          "swing_type": "outswing"
+        },
+        "wall_id": 38
+      },
+      {
+        "id": 8,
+        "type": "door_swing",
+        "center_px": [
+          636.5,
+          510.8333435058594
+        ],
+        "metadata": {
+          "radius": 3.2060062885284424,
+          "start_angle": 25.016702033083163,
+          "end_angle": 323.74601065633834,
+          "span": 298.7293086232552,
+          "swing_type": "outswing"
+        },
+        "wall_id": 59
+      },
+      {
+        "id": 9,
+        "type": "door_swing",
+        "center_px": [
+          504.0,
+          332.0
+        ],
+        "metadata": {
+          "radius": 52.34510803222656,
+          "start_angle": 43.264295411071615,
+          "end_angle": 229.02826366648515,
+          "span": 185.76396825541354,
+          "swing_type": "outswing"
+        },
+        "wall_id": 65
+      },
+      {
+        "id": 10,
+        "type": "door_swing",
+        "center_px": [
+          415.0,
+          321.5
+        ],
+        "metadata": {
+          "radius": 50.658267974853516,
+          "start_angle": 1.0230301886678357,
+          "end_angle": 358.69804732742114,
+          "span": 187.60803306786366,
+          "swing_type": "outswing"
+        },
+        "wall_id": 38
+      },
+      {
+        "id": 11,
+        "type": "door_swing",
+        "center_px": [
+          410.0,
+          233.5
+        ],
+        "metadata": {
+          "radius": 54.85673141479492,
+          "start_angle": 10.619655276155134,
+          "end_angle": 359.0122396003602,
+          "span": 191.0590314753952,
+          "swing_type": "outswing"
+        },
+        "wall_id": 95
+      }
+    ]
+  },
+  "plan1_b.png": {
+    "raw_source": "plan_b.png",
+    "wall_count": 148,
+    "openings": [
+      {
+        "id": 0,
+        "type": "window",
+        "center_px": [
+          660.0,
+          428.5
+        ],
+        "size_px": [
+          10,
+          83
+        ],
+        "wall_id": 91
+      },
+      {
+        "id": 1,
+        "type": "window",
+        "center_px": [
+          40.0,
+          313.5
+        ],
+        "size_px": [
+          8,
+          91
+        ],
+        "wall_id": 22
+      },
+      {
+        "id": 2,
+        "type": "window",
+        "center_px": [
+          660.5,
+          309.0
+        ],
+        "size_px": [
+          9,
+          86
+        ],
+        "wall_id": 70
+      },
+      {
+        "id": 3,
+        "type": "window",
+        "center_px": [
+          40.0,
+          125.0
+        ],
+        "size_px": [
+          8,
+          88
+        ],
+        "wall_id": 1
+      },
+      {
+        "id": 4,
+        "type": "window",
+        "center_px": [
+          661.5,
+          114.0
+        ],
+        "size_px": [
+          9,
+          82
+        ],
+        "wall_id": 4
+      },
+      {
+        "id": 5,
+        "type": "window",
+        "center_px": [
+          375.0,
+          57.5
+        ],
+        "size_px": [
+          92,
+          7
+        ],
+        "wall_id": 4
+      },
+      {
+        "id": 6,
+        "type": "window",
+        "center_px": [
+          106.5,
+          55.5
+        ],
+        "size_px": [
+          93,
+          7
+        ],
+        "wall_id": 4
+      },
+      {
+        "id": 7,
+        "type": "window",
+        "center_px": [
+          547.0,
+          53.0
+        ],
+        "size_px": [
+          96,
+          8
+        ],
+        "wall_id": 4
+      },
+      {
+        "id": 8,
+        "type": "door_panel",
+        "center_px": [
+          344.0,
+          573.0
+        ],
+        "size_px": [
+          144,
+          8
+        ],
+        "wall_id": 99
+      },
+      {
+        "id": 9,
+        "type": "door_swing",
+        "center_px": [
+          355.5,
+          553.5
+        ],
+        "metadata": {
+          "radius": 19.039531707763672,
+          "start_angle": 1.9749340108819766,
+          "end_angle": 358.02506598911805,
+          "span": 197.6751023973115,
+          "swing_type": "outswing"
+        },
+        "wall_id": 99
+      },
+      {
+        "id": 10,
+        "type": "door_swing",
+        "center_px": [
+          324.0,
+          398.5
+        ],
+        "metadata": {
+          "radius": 39.99072265625,
+          "start_angle": 1.1017061152063747,
+          "end_angle": 358.9390883097358,
+          "span": 190.87192148417142,
+          "swing_type": "outswing"
+        },
+        "wall_id": 72
+      },
+      {
+        "id": 11,
+        "type": "door_swing",
+        "center_px": [
+          232.5,
+          266.0
+        ],
+        "metadata": {
+          "radius": 41.439815521240234,
+          "start_angle": 0.0,
+          "end_angle": 354.6854543300552,
+          "span": 189.5536237642999,
+          "swing_type": "outswing"
+        },
+        "wall_id": 79
+      },
+      {
+        "id": 12,
+        "type": "door_swing",
+        "center_px": [
+          74.25652313232422,
+          258.74346923828125
+        ],
+        "metadata": {
+          "radius": 40.674102783203125,
+          "start_angle": 0.675947464321593,
+          "end_angle": 357.2962753708936,
+          "span": 187.4855695586873,
+          "swing_type": "outswing"
+        },
+        "wall_id": 22
+      },
+      {
+        "id": 13,
+        "type": "door_swing",
+        "center_px": [
+          509.0,
+          257.5
+        ],
+        "metadata": {
+          "radius": 41.403602600097656,
+          "start_angle": 1.3019526725788753,
+          "end_angle": 358.7546357332317,
+          "span": 189.54409996384436,
+          "swing_type": "outswing"
+        },
+        "wall_id": 76
+      },
+      {
+        "id": 14,
+        "type": "door_swing",
+        "center_px": [
+          497.5,
+          89.0
+        ],
+        "metadata": {
+          "radius": 40.078147888183594,
+          "start_angle": 0.0,
+          "end_angle": 355.6839724801344,
+          "span": 189.03573340674282,
+          "swing_type": "outswing"
+        },
+        "wall_id": 4
+      }
+    ]
+  },
+  "plan1_c.png": {
+    "raw_source": "plan_c.png",
+    "wall_count": 125,
+    "openings": [
+      {
+        "id": 0,
+        "type": "window",
+        "center_px": [
+          264.0,
+          440.5
+        ],
+        "size_px": [
+          8,
+          83
+        ],
+        "wall_id": 96
+      },
+      {
+        "id": 1,
+        "type": "window",
+        "center_px": [
+          47.0,
+          405.0
+        ],
+        "size_px": [
+          8,
+          88
+        ],
+        "wall_id": 25
+      },
+      {
+        "id": 2,
+        "type": "window",
+        "center_px": [
+          45.5,
+          144.0
+        ],
+        "size_px": [
+          7,
+          94
+        ],
+        "wall_id": 25
+      },
+      {
+        "id": 3,
+        "type": "window",
+        "center_px": [
+          600.5,
+          113.5
+        ],
+        "size_px": [
+          7,
+          81
+        ],
+        "wall_id": 28
+      },
+      {
+        "id": 4,
+        "type": "window",
+        "center_px": [
+          118.5,
+          59.5
+        ],
+        "size_px": [
+          95,
+          9
+        ],
+        "wall_id": 28
+      },
+      {
+        "id": 5,
+        "type": "window",
+        "center_px": [
+          394.5,
+          57.5
+        ],
+        "size_px": [
+          93,
+          7
+        ],
+        "wall_id": 28
+      },
+      {
+        "id": 6,
+        "type": "window",
+        "center_px": [
+          546.5,
+          55.5
+        ],
+        "size_px": [
+          85,
+          7
+        ],
+        "wall_id": 28
+      },
+      {
+        "id": 7,
+        "type": "door_panel",
+        "center_px": [
+          158.0,
+          607.0
+        ],
+        "size_px": [
+          132,
+          10
+        ],
+        "wall_id": 18
+      },
+      {
+        "id": 8,
+        "type": "door_swing",
+        "center_px": [
+          173.5,
+          586.5
+        ],
+        "metadata": {
+          "radius": 17.7342472076416,
+          "start_angle": 3.0127875041833403,
+          "end_angle": 350.83765295427827,
+          "span": 201.3350316752349,
+          "swing_type": "outswing"
+        },
+        "wall_id": 18
+      },
+      {
+        "id": 9,
+        "type": "door_swing",
+        "center_px": [
+          201.5,
+          478.5
+        ],
+        "metadata": {
+          "radius": 42.47950744628906,
+          "start_angle": 1.0050860052541812,
+          "end_angle": 359.0289780689208,
+          "span": 190.5658732711315,
+          "swing_type": "outswing"
+        },
+        "wall_id": 79
+      },
+      {
+        "id": 10,
+        "type": "door_swing",
+        "center_px": [
+          193.5,
+          371.5
+        ],
+        "metadata": {
+          "radius": 41.81516647338867,
+          "start_angle": 1.123302714075429,
+          "end_angle": 358.9190758133393,
+          "span": 185.1021652523582,
+          "swing_type": "outswing"
+        },
+        "wall_id": 75
+      },
+      {
+        "id": 11,
+        "type": "door_swing",
+        "center_px": [
+          355.5,
+          294.0
+        ],
+        "metadata": {
+          "radius": 43.02625274658203,
+          "start_angle": 2.792702365713283,
+          "end_angle": 357.4551956201869,
+          "span": 191.02599773257722,
+          "swing_type": "outswing"
+        },
+        "wall_id": 42
+      },
+      {
+        "id": 12,
+        "type": "door_swing",
+        "center_px": [
+          642.5,
+          231.0
+        ],
+        "metadata": {
+          "radius": 38.5520133972168,
+          "start_angle": 0.0,
+          "end_angle": 356.72951207681643,
+          "span": 187.94452309482978,
+          "swing_type": "outswing"
+        },
+        "wall_id": 64
+      },
+      {
+        "id": 13,
+        "type": "door_swing",
+        "center_px": [
+          367.0,
+          225.5
+        ],
+        "metadata": {
+          "radius": 37.963897705078125,
+          "start_angle": 1.7899106082460694,
+          "end_angle": 358.2100893917539,
+          "span": 188.3827352928651,
+          "swing_type": "outswing"
+        },
+        "wall_id": 101
+      },
+      {
+        "id": 14,
+        "type": "door_swing",
+        "center_px": [
+          504.0,
+          158.0
+        ],
+        "metadata": {
+          "radius": 36.40065002441406,
+          "start_angle": 0.0,
+          "end_angle": 356.6335393365702,
+          "span": 189.62143021919928,
+          "swing_type": "outswing"
+        },
+        "wall_id": 11
+      }
+    ]
+  }
+}

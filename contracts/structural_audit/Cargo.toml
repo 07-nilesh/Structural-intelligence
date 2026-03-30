@@ -1,16 +1,15 @@
 [package]
-name = "structural-audit"
+name = "structural_audit"
+description = "Immutable structural validation soroban smart contract"
 version = "0.1.0"
 edition = "2021"
+authors = ["Autonomous Agent"]
 
 [lib]
-crate-type = ["cdylib"]
+crate-type = ["cdylib", "rlib"]
 
 [dependencies]
-soroban-sdk = "20.3.2"
-
-[dev-dependencies]
-soroban-sdk = { version = "20.3.2", features = ["testutils"] }
+soroban-sdk = "20.0.0-rc2"
 
 [profile.release]
 opt-level = "z"
@@ -21,7 +20,3 @@ debug-assertions = false
 panic = "abort"
 codegen-units = 1
 lto = true
-
-[profile.release-with-logs]
-inherits = "release"
-debug-assertions = true

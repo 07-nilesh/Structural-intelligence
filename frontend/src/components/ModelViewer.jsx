@@ -1,241 +1,229 @@
-import { useRef, useEffect, useCallback } from 'react'
-import * as THREE from 'three'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import React, { useEffect, useRef } from 'react';
+import * as THREE from 'three';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
-export default function ModelViewer({ modelData }) {
-  const containerRef = useRef(null)
-  const sceneRef = useRef(null)
-  const rendererRef = useRef(null)
-  const cameraRef = useRef(null)
-  const controlsRef = useRef(null)
-  const animIdRef = useRef(null)
-
-  const initScene = useCallback(() => {
-    if (!containerRef.current || !modelData) return
-
-    // Cleanup previous scene
-    if (rendererRef.current) {
-      cancelAnimationFrame(animIdRef.current)
-      rendererRef.current.dispose()
-      containerRef.current.innerHTML = ''
-    }
-
-    const container = containerRef.current
-    const width = container.clientWidth
-    const height = container.clientHeight || 400
-
-    // Scene
-    const scene = new THREE.Scene()
-    scene.background = new THREE.Color(0x0d1117)
-    scene.fog = new THREE.Fog(0x0d1117, 30, 60)
-    sceneRef.current = scene
-
-    // Camera
-    const camera = new THREE.PerspectiveCamera(50, width / height, 0.1, 100)
-    camera.position.set(12, 10, 16)
-    camera.lookAt(0, 0, 0)
-    cameraRef.current = camera
-
-    // Renderer
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
-    renderer.setSize(width, height)
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-    renderer.shadowMap.enabled = true
-    renderer.shadowMap.type = THREE.PCFSoftShadowMap
-    renderer.toneMapping = THREE.ACESFilmicToneMapping
-    renderer.toneMappingExposure = 1.2
-    container.appendChild(renderer.domElement)
-    rendererRef.current = renderer
-
-    // Controls
-    const controls = new OrbitControls(camera, renderer.domElement)
-    controls.enableDamping = true
-    controls.dampingFactor = 0.05
-    controls.minDistance = 3
-    controls.maxDistance = 50
-    controls.maxPolarAngle = Math.PI / 2
-    controlsRef.current = controls
-
-    // Lighting
-    const ambient = new THREE.AmbientLight(0xffffff, 0.4)
-    scene.add(ambient)
-
-    const dirLight = new THREE.DirectionalLight(0xffffff, 0.8)
-    dirLight.position.set(10, 15, 10)
-    dirLight.castShadow = true
-    dirLight.shadow.mapSize.width = 2048
-    dirLight.shadow.mapSize.height = 2048
-    dirLight.shadow.camera.near = 0.5
-    dirLight.shadow.camera.far = 50
-    dirLight.shadow.camera.left = -20
-    dirLight.shadow.camera.right = 20
-    dirLight.shadow.camera.top = 20
-    dirLight.shadow.camera.bottom = -20
-    scene.add(dirLight)
-
-    const fillLight = new THREE.DirectionalLight(0x6366f1, 0.3)
-    fillLight.position.set(-8, 5, -8)
-    scene.add(fillLight)
-
-    // Ground grid
-    const gridHelper = new THREE.GridHelper(40, 40, 0x334155, 0x1e293b)
-    gridHelper.position.y = -0.16
-    scene.add(gridHelper)
-
-    // Calculate center offset for all meshes
-    let centerX = 0, centerZ = 0, meshCount = 0
-    modelData.meshes?.forEach(mesh => {
-      centerX += mesh.position[0]
-      centerZ += mesh.position[2]
-      meshCount++
-    })
-    if (meshCount > 0) {
-      centerX /= meshCount
-      centerZ /= meshCount
-    }
-
-    // Build meshes
-    modelData.meshes?.forEach(mesh => {
-      if (mesh.type !== 'box') return
-
-      const [w, h, d] = mesh.dimensions
-      const geometry = new THREE.BoxGeometry(w, h, d)
-
-      const color = new THREE.Color(mesh.color)
-      const material = new THREE.MeshPhysicalMaterial({
-        color: color,
-        roughness: 0.7,
-        metalness: 0.1,
-        clearcoat: 0.1,
-        transparent: mesh.element_type === 'floor',
-        opacity: mesh.element_type === 'floor' ? 0.8 : 1.0,
-      })
-
-      const box = new THREE.Mesh(geometry, material)
-      box.position.set(
-        mesh.position[0] - centerX,
-        mesh.position[1],
-        mesh.position[2] - centerZ
-      )
-      box.castShadow = true
-      box.receiveShadow = true
-
-      // Store metadata for raycasting
-      box.userData = {
-        wall_id: mesh.wall_id,
-        wall_type: mesh.wall_type,
-        segment_type: mesh.segment_type,
-        element_type: mesh.element_type,
-      }
-
-      scene.add(box)
-
-      // Add edges for visual clarity
-      const edges = new THREE.EdgesGeometry(geometry)
-      const lineMat = new THREE.LineBasicMaterial({
-        color: 0x000000,
-        opacity: 0.15,
-        transparent: true,
-      })
-      const wireframe = new THREE.LineSegments(edges, lineMat)
-      wireframe.position.copy(box.position)
-      scene.add(wireframe)
-    })
-
-    // Add room labels as sprites
-    modelData.labels?.forEach(label => {
-      const canvas = document.createElement('canvas')
-      canvas.width = 256
-      canvas.height = 64
-      const ctx = canvas.getContext('2d')
-      ctx.fillStyle = 'rgba(0,0,0,0)'
-      ctx.fillRect(0, 0, 256, 64)
-      ctx.fillStyle = '#94a3b8'
-      ctx.font = 'bold 20px Inter, sans-serif'
-      ctx.textAlign = 'center'
-      ctx.fillText(label.label, 128, 25)
-      ctx.font = '14px Inter, sans-serif'
-      ctx.fillStyle = '#64748b'
-      ctx.fillText(`${label.area_m2} m²`, 128, 48)
-
-      const texture = new THREE.CanvasTexture(canvas)
-      const spriteMat = new THREE.SpriteMaterial({ map: texture, transparent: true })
-      const sprite = new THREE.Sprite(spriteMat)
-      sprite.position.set(
-        label.position[0] - centerX,
-        0.3,
-        label.position[2] - centerZ
-      )
-      sprite.scale.set(3, 0.75, 1)
-      scene.add(sprite)
-    })
-
-    // Set camera target to center
-    controls.target.set(0, 1.5, 0)
-    controls.update()
-
-    // Animation loop
-    const animate = () => {
-      animIdRef.current = requestAnimationFrame(animate)
-      controls.update()
-      renderer.render(scene, camera)
-    }
-    animate()
-
-    // Resize handler
-    const handleResize = () => {
-      const w = container.clientWidth
-      const h = container.clientHeight || 400
-      camera.aspect = w / h
-      camera.updateProjectionMatrix()
-      renderer.setSize(w, h)
-    }
-    window.addEventListener('resize', handleResize)
-
-    return () => {
-      window.removeEventListener('resize', handleResize)
-      cancelAnimationFrame(animIdRef.current)
-      renderer.dispose()
-    }
-  }, [modelData])
+const ModelViewer = ({ segments, openings, floors, furniture, labels }) => {
+  const mountRef = useRef(null);
+  const sceneRef = useRef(null);
+  const [isOpen, setIsOpen] = React.useState(true);
 
   useEffect(() => {
-    const cleanup = initScene()
-    return cleanup
-  }, [initScene])
+    if (!mountRef.current) return;
+    
+    // 1. Setup Scene, Camera, Renderer
+    const width = mountRef.current.clientWidth;
+    const height = mountRef.current.clientHeight;
 
-  const resetCamera = useCallback(() => {
-    if (cameraRef.current && controlsRef.current) {
-      cameraRef.current.position.set(12, 10, 16)
-      controlsRef.current.target.set(0, 1.5, 0)
-      controlsRef.current.update()
-    }
-  }, [])
+    const scene = new THREE.Scene();
+    sceneRef.current = scene;
+    // Set background to transparent or dark grid
+    scene.background = new THREE.Color(0x0a0f1c);
 
-  const topView = useCallback(() => {
-    if (cameraRef.current && controlsRef.current) {
-      cameraRef.current.position.set(0, 20, 0.1)
-      controlsRef.current.target.set(0, 0, 0)
-      controlsRef.current.update()
+    const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
+    camera.position.set(15, 20, 20);
+    camera.lookAt(5, 0, 5);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setSize(width, height);
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.2;
+    // Clear mount in case of re-mounts
+    while (mountRef.current.firstChild) {
+      mountRef.current.removeChild(mountRef.current.firstChild);
     }
-  }, [])
+    mountRef.current.appendChild(renderer.domElement);
+
+    // 2. Add Controls
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.05;
+    controls.target.set(5, 0, 5);
+
+    // 3. Add Lights (Ambient + Directional for depth)
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
+    scene.add(ambientLight);
+
+    const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+    dirLight.position.set(10, 20, 10);
+    dirLight.castShadow = true;
+    scene.add(dirLight);
+    
+    // Add cool glowing point lights to enhance aesthetics
+    const pointLight = new THREE.PointLight(0x3b82f6, 1.5, 50);
+    pointLight.position.set(2, 5, 2);
+    scene.add(pointLight);
+
+    // Custom Glassy Grid Helper
+    const gridHelper = new THREE.GridHelper(50, 50, 0x3b82f6, 0x1e293b);
+    gridHelper.position.y = -0.01;
+    scene.add(gridHelper);
+
+    // 5. Animation Loop
+    let animationFrameId;
+    const animate = () => {
+      animationFrameId = requestAnimationFrame(animate);
+      controls.update();
+      renderer.render(scene, camera);
+    };
+    animate();
+
+    // 6. Handle Resize
+    const handleResize = () => {
+      if (!mountRef.current) return;
+      const w = mountRef.current.clientWidth;
+      const h = mountRef.current.clientHeight;
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+      renderer.setSize(w, h);
+    };
+    window.addEventListener('resize', handleResize);
+
+    // Cleanup
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      cancelAnimationFrame(animationFrameId);
+      renderer.dispose();
+      // Remove canvas child node if it exists
+      if (mountRef.current && mountRef.current.firstChild) {
+          mountRef.current.removeChild(mountRef.current.firstChild);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!sceneRef.current || !segments) return;
+    const scene = sceneRef.current;
+    
+    // Clear existing meshes except lights and grid
+    const toRemove = [];
+    scene.children.forEach(child => {
+        if (child.type === 'Mesh' || child.type === 'Group') toRemove.push(child);
+    });
+    toRemove.forEach(child => {
+        scene.remove(child);
+        if (child.geometry) child.geometry.dispose();
+        if (child.material) {
+            if (Array.isArray(child.material)) child.material.forEach(m => m.dispose());
+            else child.material.dispose();
+        }
+    });
+
+    // 1. Render Structural Wall Segments (Architectural Styling)
+    const materialLoadBearing = new THREE.MeshPhysicalMaterial({ 
+        color: 0xfcfcf0, metalness: 0.1, roughness: 0.2, transparent: true, opacity: 0.95, side: THREE.DoubleSide
+    });
+    const materialPartition = new THREE.MeshPhysicalMaterial({ 
+        color: 0xf0f0e0, metalness: 0.1, roughness: 0.3, transparent: true, opacity: 0.9, side: THREE.DoubleSide
+    });
+
+    segments.forEach(seg => {
+        let mat = seg.type === 'load-bearing' ? materialLoadBearing : materialPartition;
+        const geometry = new THREE.BoxGeometry(seg.length, seg.height, seg.thickness);
+        const mesh = new THREE.Mesh(geometry, mat);
+        mesh.position.set(seg.center_x, seg.elevation, seg.center_y);
+        mesh.rotation.y = -seg.rotation;
+        scene.add(mesh);
+    });
+
+    // 2. Render Floors (Wood/Tile)
+    if (floors) {
+        floors.forEach(f => {
+            const fColor = f.material_type === 'wood' ? 0xd1bfa7 : 0xe5e7eb;
+            const mat = new THREE.MeshPhysicalMaterial({ color: fColor, roughness: 0.6, metalness: 0.1 });
+            const geometry = new THREE.PlaneGeometry(f.width, f.length);
+            const mesh = new THREE.Mesh(geometry, mat);
+            mesh.rotation.x = -Math.PI / 2;
+            mesh.position.set(f.center_x, 0.01, f.center_y);
+            scene.add(mesh);
+        });
+    }
+
+    // 3. Render Furniture Placeholders
+    if (furniture) {
+        furniture.forEach(f => {
+            const mat = new THREE.MeshPhysicalMaterial({ color: f.color, roughness: 0.8 });
+            const geometry = new THREE.BoxGeometry(f.width, f.height, f.length);
+            const mesh = new THREE.Mesh(geometry, mat);
+            mesh.position.set(f.x, f.y, f.z);
+            scene.add(mesh);
+        });
+    }
+
+    // 4. Render Openings (Glass & Door Panels)
+    if (openings) {
+        openings.forEach(op => {
+            if (op.type === 'window') {
+                const winMat = new THREE.MeshPhysicalMaterial({ color: 0x87ceeb, transparent: true, opacity: 0.3, transmission: 0.9, roughness: 0.1 });
+                const geometry = new THREE.BoxGeometry(op.length, op.height, 0.05);
+                const mesh = new THREE.Mesh(geometry, winMat);
+                mesh.position.set(op.center_x, op.elevation, op.center_y);
+                mesh.rotation.y = -op.rotation;
+                scene.add(mesh);
+            } else if (op.type === 'door') {
+                const doorGroup = new THREE.Group();
+                const doorMat = new THREE.MeshPhysicalMaterial({ color: 0x8b4513, metalness: 0.2, roughness: 0.5 });
+                const geometry = new THREE.BoxGeometry(op.length, op.height, 0.04);
+                const mesh = new THREE.Mesh(geometry, doorMat);
+                mesh.position.x = op.length / 2;
+                doorGroup.add(mesh);
+                doorGroup.position.set(
+                  op.center_x - (op.length / 2) * Math.cos(op.rotation),
+                  op.elevation,
+                  op.center_y + (op.length / 2) * Math.sin(op.rotation)
+                );
+                doorGroup.rotation.y = -op.rotation;
+                if (isOpen) {
+                  const angle = op.metadata?.swing_type === 'outswing' ? -1.5 : 1.5;
+                  doorGroup.rotation.y += angle;
+                }
+                scene.add(doorGroup);
+            }
+        });
+    }
+
+    // 5. Render Floating Room Labels
+    if (labels) {
+        labels.forEach(l => {
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+            canvas.width = 256;
+            canvas.height = 64;
+            context.fillStyle = 'rgba(0,0,0,0)';
+            context.fillRect(0, 0, 256, 64);
+            context.font = 'Bold 32px Inter, Arial';
+            context.textAlign = 'center';
+            context.fillStyle = '#1e293b';
+            context.fillText(l.text, 128, 48);
+            
+            const texture = new THREE.CanvasTexture(canvas);
+            const spriteMaterial = new THREE.SpriteMaterial({ map: texture });
+            const sprite = new THREE.Sprite(spriteMaterial);
+            sprite.scale.set(4, 1, 1);
+            sprite.position.set(l.x, l.z, l.y);
+            scene.add(sprite);
+        });
+    }
+
+  }, [segments, openings, isOpen, floors, furniture, labels]);
 
   return (
-    <div className="section-card">
-      <div className="section-header">
-        <h2>🏠 3D Model</h2>
-        <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>
-          {modelData?.metadata?.total_meshes || 0} meshes • Drag to rotate
-        </span>
-      </div>
-      <div className="section-body" style={{ padding: 0 }}>
-        <div className="model-viewer-container" ref={containerRef}>
-          <div className="viewer-controls">
-            <button onClick={resetCamera}>↻ Reset</button>
-            <button onClick={topView}>⬇ Top</button>
-          </div>
+    <div style={{ width: '100%', height: '100%', position: 'relative' }}>
+        {!segments && (
+            <div className="absolute inset-0 flex items-center justify-center text-slate-400 z-10 pointer-events-none">
+                <p>Awaiting Architectural Data...</p>
+            </div>
+        )}
+        <div className="absolute bottom-4 left-4 z-20 flex gap-2">
+            <button 
+              onClick={() => setIsOpen(!isOpen)}
+              className="bg-blue-600/80 hover:bg-blue-500 text-white text-xs px-3 py-1.5 rounded-lg backdrop-blur-md transition-colors font-bold uppercase tracking-wider shadow-lg border border-blue-400/30"
+            >
+              {isOpen ? 'Close Doors' : 'Open Doors'}
+            </button>
         </div>
-      </div>
+      <div ref={mountRef} style={{ width: '100%', height: '100%', borderRadius: '1.25rem', overflow: 'hidden' }} />
     </div>
-  )
-}
+  );
+};
+
+export default ModelViewer;
